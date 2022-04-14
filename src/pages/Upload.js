@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 import { Form, Alert } from "react-bootstrap";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "../components/Button";
+import { Container, Paper } from "@material-ui/core";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Upload() {
-  const [properties, setProperties] = useState("");
-  const [file, setFile] = useState("");
+  const [LBDfile, setLBDfile] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
   const [message, setMessage] = useState("");
 
-  async function postProjects(e) {
-    e.preventdefault();
+  async function postProject(e) {
+    e.preventDefault();
     try {
-      const data = { properties };
-      setProperties("");
+      const data = {
+        name,
+      };
+      console.log(data);
 
-      axios.post("http://localhost:5000/upload", data).then((response) => {
+      setName("");
+
+      axios.post("http://localhost:5000/project", data).then((response) => {
         console.log(`response`, response);
         console.log(`created`, response.data);
 
@@ -27,7 +32,7 @@ function Upload() {
         console.log(`projectId`, projectId);
 
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append("LBDfile", LBDfile);
         console.log(`formData`, formData);
 
         axios
@@ -35,8 +40,7 @@ function Upload() {
             `http://localhost:5000/api/project/${projectId}/upload`,
             formData
           )
-          .then((res) => console.log(`res`, res))
-
+          .then((res) => console.log("res", res))
           .catch((error) => console.log("error uploading Formdata", error));
       });
     } catch (err) {
@@ -45,53 +49,56 @@ function Upload() {
       console.log("error", err.message);
     }
   }
+
   function handleAlertClose() {
     setError(null);
     setShowError(false);
   }
-
   function onChangeFile(e) {
     e.preventDefault();
-    setFile(e.target.files[0]);
+    setLBDfile(e.target.files[0]);
   }
 
+  //todo: layout
   const add = (
-    <div>
-      <Form onSubmit={postProjects}>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Upload IFC file</Form.Label>
-          <input type="file" name="file" onChange={onChangeFile} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Which properties do you want to check?</Form.Label>
-          <Form.Check label="Select all" />
-          <Form.Check label="Doors" />
-          <Form.Check label="Stairs" />
-          <Form.Check label="Passages" />
-        </Form.Group>
-
-        <Button
-          buttonStyle="btn--secondary"
-          buttonSize="btn--medium"
-          type="submit"
+    <div style={{ marginTop: 100, marginBottom: 50 }}>
+      <Paper elevation={3} display="flex" style={{ marginTop: 20 }}>
+        <Container
+          component="main"
+          maxWidth="xs"
+          style={{ marginTop: 10, marginBottom: 5 }}
         >
-          Submit
-        </Button>
-        {showError ? (
-          <div>
-            <Alert variant="danger" dismissible onClose={handleAlertClose}>
-              {error}
-            </Alert>
-          </div>
-        ) : (
-          <></>
-        )}
-      </Form>
-      <h2>{message}</h2>
+          <Form onSubmit={postProject}>
+            <Form.Group>
+              <Form.Label>LBD</Form.Label>
+              <input type="file" name="LBDfile" onChange={onChangeFile} />
+            </Form.Group>
+
+            <Button
+              buttonStyle="btn--secondary"
+              buttonSize="btn--medium"
+              type="submit"
+            >
+              CHECK COMPLIANCE
+            </Button>
+            {showError ? (
+              <div style={{ marginTop: 30 }}>
+                <Alert variant="danger" dismissible onClose={handleAlertClose}>
+                  {" "}
+                  {error}{" "}
+                </Alert>
+              </div>
+            ) : (
+              <></>
+            )}
+          </Form>
+          <p>{message}</p>
+        </Container>
+      </Paper>
     </div>
   );
-
   return <div>{add}</div>;
 }
-
 export default Upload;
+
+//todo: link to report after submit

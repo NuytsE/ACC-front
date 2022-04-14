@@ -5,7 +5,7 @@ export class Home extends Component {
     render () {
         return (
             <div>
-                <p>Explanation</p>
+                <p>Explanation and button naar /upload</p>
             </div>
         )
     }

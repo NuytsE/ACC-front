@@ -14,13 +14,10 @@ class NavBar extends Component {
               Home
             </Nav.Link>
             <Nav.Link as={Link} to="/upload">
-              Upload
-            </Nav.Link>
-            <Nav.Link as={Link} to="/report">
-              Report
+              Validate
             </Nav.Link>
             <Nav.Link as={Link} to="/legislation">
-              Legislation
+              Rulebook.ttl
             </Nav.Link>
           </Nav>
           </Container>
