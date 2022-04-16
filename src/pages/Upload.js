@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Form, Alert } from "react-bootstrap";
+import { Form, Alert, Button } from "react-bootstrap";
 import axios from "axios";
-import { Button } from "../components/Button";
-import { Container, Paper } from "@material-ui/core";
+import { Container} from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Upload() {
@@ -59,10 +58,8 @@ function Upload() {
     setLBDfile(e.target.files[0]);
   }
 
-  //todo: layout
   const add = (
     <div style={{ marginTop: 100, marginBottom: 50 }}>
-      <Paper elevation={3} display="flex" style={{ marginTop: 20 }}>
         <Container
           component="main"
           maxWidth="xs"
@@ -70,13 +67,11 @@ function Upload() {
         >
           <Form onSubmit={postProject}>
             <Form.Group>
-              <Form.Label>LBD</Form.Label>
               <input type="file" name="LBDfile" onChange={onChangeFile} />
             </Form.Group>
-
+            <br /> <br />
             <Button
-              buttonStyle="btn--secondary"
-              buttonSize="btn--medium"
+              variant="outline-dark"
               type="submit"
             >
               CHECK COMPLIANCE
@@ -94,7 +89,6 @@ function Upload() {
           </Form>
           <p>{message}</p>
         </Container>
-      </Paper>
     </div>
   );
   return <div>{add}</div>;

@@ -13,8 +13,9 @@ class Routing extends Component {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/rulebook" element={<Legislation />} />
+          <Route path="/legislation" element={<Legislation />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/625816c8d991f2c44981e634" element={<Report/>} />
         </Routes>
       </BrowserRouter>
     );
