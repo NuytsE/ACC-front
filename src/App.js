@@ -1,14 +1,12 @@
-import React, {Component} from 'react'
+import React  from 'react'
 import Routing from './Routes'
 
-class App extends Component {
-  render () {
+function App()  {
     return (
       <div className='App'>
         <Routing/>
       </div>
     )
   }
-}
 
 export default App

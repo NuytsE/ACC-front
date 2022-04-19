@@ -5,43 +5,22 @@ import { Container} from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Upload() {
-  const [LBDfile, setLBDfile] = useState("");
-  const [name, setName] = useState("");
+  const [LBDFile, setLBDFile] = useState("");
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message] = useState("");
 
   async function postProject(e) {
     e.preventDefault();
     try {
-      const data = {
-        name,
-      };
-      console.log(data);
-
-      setName("");
-
-      axios.post("http://localhost:5000/project", data).then((response) => {
-        console.log(`response`, response);
-        console.log(`created`, response.data);
-
-        setMessage(response.data.message);
-
-        const projectId = response.data.project._id;
-        console.log(`projectId`, projectId);
-
         const formData = new FormData();
-        formData.append("LBDfile", LBDfile);
+        formData.append("LBDFile", LBDFile);
         console.log(`formData`, formData);
 
-        axios
-          .post(
-            `http://localhost:5000/api/project/${projectId}/upload`,
-            formData
-          )
+        axios.post(`http://localhost:4800/upload`, formData)
           .then((res) => console.log("res", res))
           .catch((error) => console.log("error uploading Formdata", error));
-      });
+      ;
     } catch (err) {
       setError(err.message);
       setShowError(true);
@@ -55,7 +34,7 @@ function Upload() {
   }
   function onChangeFile(e) {
     e.preventDefault();
-    setLBDfile(e.target.files[0]);
+    setLBDFile(e.target.files[0]);
   }
 
   const add = (
@@ -67,7 +46,7 @@ function Upload() {
         >
           <Form onSubmit={postProject}>
             <Form.Group>
-              <input type="file" name="LBDfile" onChange={onChangeFile} />
+              <input type="file" name="LBDFile" onChange={onChangeFile} />
             </Form.Group>
             <br /> <br />
             <Button
