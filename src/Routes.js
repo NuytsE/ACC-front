@@ -15,7 +15,7 @@ class Routing extends Component {
           <Route path="/" element={<Home />} />
           <Route path="/legislation" element={<Legislation />} />
           <Route path="/upload" element={<Upload />} />
-          <Route path="/625816c8d991f2c44981e634" element={<Report/>} />
+          <Route path="/report" element={<Report/>} />
         </Routes>
       </BrowserRouter>
     );

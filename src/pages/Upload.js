@@ -73,5 +73,3 @@ function Upload() {
   return <div>{add}</div>;
 }
 export default Upload;
-
-//todo: link to report after submit
