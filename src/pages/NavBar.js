@@ -8,11 +8,8 @@ class NavBar extends Component {
       <div>
         <Navbar bg="dark" variant="dark">
             <Container>
-          <Navbar.Brand> ACC² </Navbar.Brand>
+          <Navbar.Brand as={Link} to ="/"> ACC² </Navbar.Brand>
           <Nav className="ml-auto">
-            <Nav.Link as={Link} to="/">
-              Home
-            </Nav.Link>
             <Nav.Link as={Link} to="/upload">
               Validate
             </Nav.Link>

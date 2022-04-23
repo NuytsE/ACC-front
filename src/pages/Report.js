@@ -1,23 +1,41 @@
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import axios from 'axios'
-import ResultTimeline from "../functions/resulttimeline";
+import {Row, Col} from 'react-bootstrap'
+import Result from "../components/Result";
 
-//https://levelup.gitconnected.com/fetch-api-data-with-axios-and-display-it-in-a-react-app-with-hooks-3f9c8fa89e7b
-export default function Report() {
-  const [results, getResults] = useState('')
+const Report = () => {
 
-  useEffect (() => {
-    getAllResults()
-  }, [])
+    useEffect(() => {
+        getResults()
+    }, [])
 
-  const getAllResults = () => {
-    axios.get('http://localhost:4800/report')
-    .then((response) => {
-      const allResults = response.data.results.allResults
-      getResults(allResults)
-    })
-    .catch(error => console.error(`Error: ${error}`))
-  }
-  return (<ResultTimeline results={results}/>)
+
+    const [results, setResults] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    const getResults = async () => {
+        try {
+            const res = await axios.get('http://localhost:4800/report')
+            setResults(res.data.results)
+            setLoading(true)
+        }
+     catch (err) {
+        alert(err.message)
+    }
+    }
+    return(
+        <Fragment>
+            <div>There were {results.length} building elements found that do not comply to the Belgian building code on accessibility.</div>
+            <Row sm={1} md={1} lg={1}>
+                {loading &&
+                results.map((result) => (
+                    <Col key={result}>
+                        <Result result = {result}/>
+                    </Col>
+                ))}
+            </Row>
+        </Fragment>
+    )
 }
+export default Report
 
