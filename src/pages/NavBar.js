@@ -8,14 +8,9 @@ class NavBar extends Component {
       <div>
         <Navbar bg="dark" variant="dark">
             <Container>
-          <Navbar.Brand as={Link} to ="/"> ACC² </Navbar.Brand>
+          <Navbar.Brand as={Link} to ="/"> Compliance checker </Navbar.Brand>
           <Nav className="ml-auto">
-            <Nav.Link as={Link} to="/upload">
-              Validate
-            </Nav.Link>
-            <Nav.Link as={Link} to="/legislation">
-              Rulebook.ttl
-            </Nav.Link>
+            
           </Nav>
           </Container>
         </Navbar>

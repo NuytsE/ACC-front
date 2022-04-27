@@ -1,12 +1,20 @@
 import React from 'react'
-import {Button, Card} from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 
 const Result = ({ result }) => {
+    if (result.severity === "http://www.w3.org/ns/shacl#Violation") {
+        var severity = 'violation'
+    }
+
+    var sourceShape = result.sourceShape.slice(18)
     return (
         <>
-        <Card className='my-3 p-3 rounded h-90'>
+        <Card border="white" className='my-3 p-3 rounded h-90' style={{ width: '80rem' }}>
+            <Card.Header>{`A ${severity} was found in the ${sourceShape} shape`}</Card.Header>
         <Card.Body>
-                {`The building element with id ${result.batid} does not comply. `}
+                {`The building element with name "${result.focusNode}"`} <br></br>
+                {`and id ${result.batid} does not comply.`}
+                <br></br> <br></br>
                 {`${result.message}`}
         </Card.Body>
         </Card>

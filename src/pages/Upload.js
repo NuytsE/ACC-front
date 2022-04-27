@@ -20,6 +20,8 @@ function Upload() {
         axios.post(`http://localhost:4800/upload`, formData)
           .then((res) => console.log("res", res))
           .catch((error) => console.log("error uploading Formdata", error));
+        
+        window.location.href = '/report';
       ;
     } catch (err) {
       setError(err.message);
@@ -49,12 +51,14 @@ function Upload() {
               <input type="file" name="LBDFile" onChange={onChangeFile} />
             </Form.Group>
             <br /> <br />
+            
             <Button
               variant="outline-dark"
               type="submit"
             >
               CHECK COMPLIANCE
             </Button>
+           
             {showError ? (
               <div style={{ marginTop: 30 }}>
                 <Alert variant="danger" dismissible onClose={handleAlertClose}>
