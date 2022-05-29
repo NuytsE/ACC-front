@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Row, Col } from 'react-bootstrap'
 import Result from "../components/Result";
 import { Grid } from "@material-ui/core";
+import { Button } from "react-bootstrap";
 
 const Report = () => {
 
@@ -12,6 +13,8 @@ const Report = () => {
 
     const [results, setResults] = useState([])
     const [loading, setLoading] = useState(false)
+
+    console.log(results.length)
 
     const getResults = async () => {
         try {
@@ -23,14 +26,15 @@ const Report = () => {
         alert(err.message)
     }
     }
-    if(results === "conforms") {
+    if(results.length === 0) {
         return (
-            <h4 style={{padding:"65px"}}>Your building project complies to the Belgian building code on accessibility.</h4>
+            <h4 style={{marginLeft:"200px", marginTop:"50px"}}>Your building project complies to the checked part of the Belgian building code on accessibility.</h4>
         )
     } else {
         return(
             <Grid style={{marginLeft:"185px", marginTop:"50px"}}>
                 <h4 style={{marginLeft:"15px"}}>There were {results.length} building elements found that do not comply to the Belgian building code on accessibility.</h4>
+                <Button variant="outline-dark" style={{marginLeft:"15px", marginTop:"10px"}}> Download validation report</Button>
                 <Row sm={1} md={1} lg={1}>
                     {loading &&
                     results.map((result) => (
