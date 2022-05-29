@@ -7,14 +7,14 @@ Do the same for the backend of the application, on `https://github.com/NuytsE/AC
 Run `npm install` in both of the folders. 
 Run `npm start` in the frontend folder, and `npm run dev` in the backend folder.
 
-# Use
+## Use
 You can upload a LBD graph of a building project
 ![screenshot](public/upload.png "Screenshot of the user interface on the upload page")
 
 This can either lead to a non-conforming validation report
-![screenshot](public/upload.png "Screenshot of the user interface on the upload page")
+![screenshot](public/report.png "Screenshot of the user interface of the validation report, with 34 violations")
 
 Or to a conforming validation report
-![screenshot](public/upload.png "Screenshot of the user interface on the upload page")
+![screenshot](public/conforming.png "Screenshot of the user interface on the conforming validation report")
 
 If you do not have a LBD graph to upload, you can directly go to `https:localhost:3000/report` to view the validation report of a student project, used in the corresponding thesis for the demonstration.
