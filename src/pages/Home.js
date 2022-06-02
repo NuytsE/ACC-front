@@ -10,7 +10,7 @@ export class Home extends Component {
           University.
         </p>
         <p>
-          You can upload a Linked Building Data file and check the compliance
+          You can upload a Linked Building Data graph and check the compliance
           with the Belgian building code on accessibility.
         </p>
         <p>
