@@ -12,21 +12,23 @@ const Report = () => {
     }, [])
 
     const [results, setResults] = useState([])
-    const [loading, setLoading] = useState(false)
-
-    console.log(results.length)
+    const [loading, setLoading] = useState(true)
 
     const getResults = async () => {
         try {
             const res = await axios.get('http://localhost:4800/report')
             setResults(res.data.results)
-            setLoading(true)
         }
      catch (err) {
         alert(err.message)
     }
     }
-    if(results.length === 0) {
+    
+    if (results.length === 0) {
+        return (
+            <h4 style={{marginLeft:"200px", marginTop:"50px"}}>Loading...</h4>
+        )
+    } else if (results === "conforms") {
         return (
             <h4 style={{marginLeft:"200px", marginTop:"50px"}}>Your building project complies to the checked part of the Belgian building code on accessibility.</h4>
         )
